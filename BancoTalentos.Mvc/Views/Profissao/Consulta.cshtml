@@ -1,9 +1,9 @@
   
 @model IEnumerable<BancoTalentos.Modelos.Models.Profissao>
 
-<h2>Todas Categorias</h2>
+<h2>Todas Profissões</h2>
 
-<a href="/Profissao/Criar" class="btn">Nova Profissao</a>
+<a href="/Profissao/Cadastro" class="btn-success">Nova Profissao</a>
 
 <div class="row">
     <div class="col-md-12">
@@ -11,15 +11,25 @@
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th>Status</th>
+                    <th colspan="2">Status</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@item.Nome </td>
-                        <td>@item.Ativo </td>
+                        <td>
+                            @item.Nome 
+                            </td>
+                        <td>
+                            <input type="checkbox" @(item.Ativo == true ? "checked" : "" ) disabled/>
+                        </td>
+                        <td>
+                            <a href="/Profissao/Editar/@item.IdProfissao" class="btn">Editar</a>
+                        </td>
+                        <td>
+                            <a href="/Profissao/Deletar/@item.IdProfissao" class="btn">Deletar</a>
+                        </td>
                     </tr> 
                 }
             </tbody>

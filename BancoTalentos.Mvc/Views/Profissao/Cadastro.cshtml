@@ -1,0 +1,26 @@
+@model BancoTalentos.Modelos.Models.Profissao
+
+<h2>Cadastro Profissão</h2>
+
+<form class="form-horizontal" asp-action="Salvar" asp-controller="Profissao" method="POST">
+
+    <input type="hidden" class="form-control" asp-for="IdProfissao">
+    <div class="form-group">
+        <label class="col-md-1 control-label" for="Name">Nome</label>
+        <div class="col-md-2">
+        <input type="text" class="form-control" asp-for="Nome">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-1 control-label" for="Name">Ativo</label>
+        <div class="col-md-2">
+        <input type="checkbox" asp-for="Ativo">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            <button class="btn btn-success">Salvar</button>
+        </div>
+    </div>
+
+</form>
