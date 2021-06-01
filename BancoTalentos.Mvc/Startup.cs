@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using BancoTalentos.Dados;
+using Microsoft.EntityFrameworkCore;
 
 namespace BancoTalentos.Mvc
 {
@@ -23,6 +25,11 @@ namespace BancoTalentos.Mvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var teste = Configuration.GetConnectionString("DefaultConnection");
+
+            services.AddDbContext<AplicacaoContexto>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddControllersWithViews();
         }
 

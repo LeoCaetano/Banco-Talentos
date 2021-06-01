@@ -1,0 +1,28 @@
+  
+@model IEnumerable<BancoTalentos.Modelos.Models.Profissao>
+
+<h2>Todas Categorias</h2>
+
+<a href="/Profissao/Criar" class="btn">Nova Profissao</a>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Nome </td>
+                        <td>@item.Ativo </td>
+                    </tr> 
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
