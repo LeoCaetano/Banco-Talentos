@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BancoTalentos.Dados;
 using Microsoft.EntityFrameworkCore;
+using BancoTalentos.Dados.Repositorios;
+using BancoTalentos.Modelos.Interfaces;
 
 namespace BancoTalentos.Mvc
 {
@@ -29,6 +31,8 @@ namespace BancoTalentos.Mvc
 
             services.AddDbContext<AplicacaoContexto>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IRepositoryProfissao, RepositoryProfissao>();
 
             services.AddControllersWithViews();
         }

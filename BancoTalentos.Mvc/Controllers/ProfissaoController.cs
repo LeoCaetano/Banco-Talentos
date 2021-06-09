@@ -8,18 +8,20 @@ using Microsoft.Extensions.Logging;
 using BancoTalentos.Mvc.Models;
 using BancoTalentos.Dados;
 using BancoTalentos.Modelos.Models;
+using BancoTalentos.Dados.Repositorios;
+using BancoTalentos.Modelos.Interfaces;
 
 namespace BancoTalentos.Mvc.Controllers
 {
     public class ProfissaoController : Controller
     {
-        private readonly AplicacaoContexto _contexto;
-        public ProfissaoController(AplicacaoContexto contexto)
+        private readonly IRepositoryProfissao _repositoryProfissao;
+        public ProfissaoController(IRepositoryProfissao repository)
         {
-            _contexto = contexto;
+            _repositoryProfissao = repository;
         }
-        public IActionResult Consulta(){
-            var profissoes = _contexto.ProfissaoDbSet.ToList();
+        public async Task<IActionResult> Consulta(){
+            var profissoes = await _repositoryProfissao.RetornaTodosAsync();
             return View(profissoes);
         }
 
@@ -31,33 +33,21 @@ namespace BancoTalentos.Mvc.Controllers
         [HttpPost]
         public async Task<IActionResult> Salvar(Profissao profissao)
         {
-
-            if(profissao.IdProfissao > 0){
-                Profissao prof = _contexto.ProfissaoDbSet.First(x => x.IdProfissao == profissao.IdProfissao);
-                prof.Nome = profissao.Nome;
-                prof.Ativo = profissao.Ativo;
-            }else
-                _contexto.ProfissaoDbSet.Add(profissao);
-            
-            await _contexto.SaveChangesAsync();
-            
+            await _repositoryProfissao.SalvarAsync(profissao);
             return RedirectToAction("Consulta");
         }
 
         [HttpGet]
          public IActionResult Editar(int id)
-        {
-            var profissao = _contexto.ProfissaoDbSet.First(c => c.IdProfissao == id);
-            
+        {   
+            Profissao profissao = _repositoryProfissao.ConsultaPorIdAsync(id);
+
             return View("Cadastro", profissao);
         }
 
-        public async Task<IActionResult> Deletar(int id)
-        {
-            var profissao = _contexto.ProfissaoDbSet.First(c => c.IdProfissao == id);
-            _contexto.ProfissaoDbSet.Remove(profissao);
-            await _contexto.SaveChangesAsync();
-            
+        public IActionResult Deletar(int id)
+        {   
+            _repositoryProfissao.Deletar(id);
             return RedirectToAction("Consulta");
         }
         
