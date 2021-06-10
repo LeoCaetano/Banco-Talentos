@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 namespace BancoTalentos.Modelos.Interfaces
 {
-    public interface IRepositoryProfissao : IRepositorioBase<Profissao>
+    public interface IRepositoryProfissional : IRepositorioBase<Profissional>
     {
-        bool Deletar(int id);
+        bool TrocarStatus(int id, bool novoStatus);
     }
 }

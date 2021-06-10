@@ -13,41 +13,44 @@ using BancoTalentos.Modelos.Interfaces;
 
 namespace BancoTalentos.Mvc.Controllers
 {
-    public class ProfissaoController : Controller
+    public class ProfissionalController : Controller
     {
+        private readonly IRepositoryProfissional _repositoryProfissional;
         private readonly IRepositoryProfissao _repositoryProfissao;
-        public ProfissaoController(IRepositoryProfissao repository)
+        public ProfissionalController(IRepositoryProfissional repositoryProfissional, IRepositoryProfissao repositoryProfissao)
         {
-            _repositoryProfissao = repository;
+            _repositoryProfissional = repositoryProfissional;
+            _repositoryProfissao = repositoryProfissao;
         }
         public IActionResult Consulta(){
-            var profissoes = _repositoryProfissao.RetornaTodos();
+            var profissoes = _repositoryProfissional.RetornaTodos();
             return View(profissoes);
         }
 
         public IActionResult Cadastro(){
+            ViewBag.profissoes = _repositoryProfissao.RetornaTodos();
 
             return View();
         }
 
         [HttpPost]
-        public IActionResult Salvar(Profissao profissao)
+        public IActionResult Salvar(Profissional profissional)
         {
-            _repositoryProfissao.Salvar(profissao);
+            _repositoryProfissional.Salvar(profissional);
             return RedirectToAction("Consulta");
         }
 
         [HttpGet]
          public IActionResult Editar(int id)
         {   
-            Profissao profissao = _repositoryProfissao.ObterPorId(id);
+            Profissional profissional = _repositoryProfissional.ObterPorId(id);
 
-            return View("Cadastro", profissao);
+            return View("Cadastro", profissional);
         }
 
-        public IActionResult Deletar(int id)
+        public IActionResult Inativar(int id)
         {   
-            _repositoryProfissao.Deletar(id);
+            _repositoryProfissional.TrocarStatus(id, false);
             return RedirectToAction("Consulta");
         }
         

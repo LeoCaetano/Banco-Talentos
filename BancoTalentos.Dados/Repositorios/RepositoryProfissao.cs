@@ -18,27 +18,26 @@ namespace BancoTalentos.Dados.Repositorios
         {
             _contexto = contexto;
         }
-        public async Task<bool> SalvarAsync(Profissao profissao)
+        public void Salvar(Profissao profissao)
         {
             
             if(profissao.IdProfissao > 0){
-                Profissao prof = await _contexto.ProfissaoDbSet.FirstAsync(x => x.IdProfissao == profissao.IdProfissao);
+                Profissao prof = _contexto.ProfissaoDbSet.First(x => x.IdProfissao == profissao.IdProfissao);
                 prof.Nome = profissao.Nome;
                 prof.Ativo = profissao.Ativo;
             }else
                 _contexto.ProfissaoDbSet.Add(profissao);
             
-            return await _contexto.SaveChangesAsync() > 0;
         }
 
-        public Profissao ConsultaPorIdAsync(int id)
+        public Profissao ObterPorId(int id)
         {
             return _contexto.ProfissaoDbSet.First(c => c.IdProfissao == id);
         }
 
-        public Task<List<Profissao>> RetornaTodosAsync()
+        public List<Profissao> RetornaTodos()
         {
-            return _contexto.ProfissaoDbSet.ToListAsync();
+            return _contexto.ProfissaoDbSet.ToList();
         }
 
         public bool Deletar(int id)
@@ -49,5 +48,6 @@ namespace BancoTalentos.Dados.Repositorios
 
             return _contexto.SaveChanges() > 0;
         }
+
     }
 }

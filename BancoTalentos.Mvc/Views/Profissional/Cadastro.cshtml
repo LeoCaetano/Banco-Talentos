@@ -1,0 +1,34 @@
+@model BancoTalentos.Modelos.Models.Profissional
+
+<h2>Cadastro Profissão</h2>
+
+<form class="form-horizontal" asp-action="Salvar" asp-controller="Profissional" method="POST">
+
+    <input type="hidden" class="form-control" asp-for="IdProfissional">
+    <div class="form-group">
+        <label class="col-md-1 control-label" for="Name">Nome Completo</label>
+        <div class="col-md-2">
+        <input type="text" class="form-control" asp-for="NomeCompleto">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-1 control-label" for="Name">Profissão</label>
+        <div class="col-md-2">
+            <select class="form-control" asp-for="IdProfissao" 
+                asp-items='@(new SelectList(@ViewBag.lstProfissaos, "IdProfissao", "Nome"))'>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-1 control-label" for="Name">Ativo</label>
+        <div class="col-md-2">
+        <input type="checkbox" asp-for="Ativo">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            <button class="btn btn-success">Salvar</button>
+        </div>
+    </div>
+
+</form>

@@ -8,6 +8,8 @@ namespace BancoTalentos.Dados
         public AplicacaoContexto(DbContextOptions<AplicacaoContexto> options) : base(options){}
         
         public DbSet<Profissao> ProfissaoDbSet{ get; set; }
+
+        public DbSet<Profissional> ProfissionalDbSet{ get; set; }
         
     }
 }

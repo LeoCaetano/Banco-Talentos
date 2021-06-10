@@ -1,0 +1,46 @@
+  
+@model IEnumerable<BancoTalentos.Modelos.Models.Profissional>
+
+<h2>Todos Profissionais</h2>
+
+<a href="/Profissional/Cadastro" class="btn-success">Novo Profissional</a>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Profissao</th>
+                    <th>Email</th>
+                    <th colspan="2">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.NomeCompleto 
+                        </td>
+                        <td>
+                            @item.Profissao.Nome 
+                        </td>
+                        <td>
+                            @item.Email 
+                        </td>
+                        <td>
+                            <input type="checkbox" @(item.Ativo == true ? "checked" : "" ) disabled/>
+                        </td>
+                        <td>
+                            <a href="/Profissional/Editar/@item.IdProfissao" class="btn">Editar</a>
+                        </td>
+                        <td>
+                            <a href="/Profissional/Inativar/@item.IdProfissao" class="btn">Inativar</a>
+                        </td>
+                    </tr> 
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
