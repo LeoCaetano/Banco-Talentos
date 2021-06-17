@@ -7,6 +7,11 @@ namespace BancoTalentos.Modelos.Models
     [Table("Profissional")]
     public class Profissional
     {
+        public Profissional()
+        {
+            DataInclusao = DateTime.Now;
+        }
+
         [KeyAttribute]
         public int IdProfissional { get; set; }
         
@@ -22,11 +27,13 @@ namespace BancoTalentos.Modelos.Models
         [Column("Telefone")]
         public string Telefone { get; set; }
 
-        [ForeignKey("IdProfissao")]
+        
         public int IdProfissao { get; set; }
+        
+        [ForeignKey("IdProfissao")]
         public Profissao Profissao { get; set; }
         
-        [ForeignKey("DataInclusao")]
+        [Column("DataInclusao")]
         public DateTime DataInclusao { get; set; }
 
         [ForeignKey("Ativo")]

@@ -10,18 +10,19 @@ using System.Linq;
 
 namespace BancoTalentos.Dados.Repositorios
 {
-    public class RepositoryProfissional : IRepositoryProfissional
+    public class ProfissionalRepository : IProfissionalRepository
     {
         private readonly AplicacaoContexto _contexto;
 
-        public RepositoryProfissional(AplicacaoContexto contexto)
+        public ProfissionalRepository(AplicacaoContexto contexto)
         {
             _contexto = contexto;
         }
        
         public List<Profissional> RetornaTodos()
         {
-            return _contexto.ProfissionalDbSet.ToList();
+            return _contexto.ProfissionalDbSet
+                .Include(x => x.Profissao).ToList();
         }
 
         public void Salvar(Profissional profissional)

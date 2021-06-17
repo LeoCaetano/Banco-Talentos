@@ -12,6 +12,7 @@ using BancoTalentos.Dados;
 using Microsoft.EntityFrameworkCore;
 using BancoTalentos.Dados.Repositorios;
 using BancoTalentos.Modelos.Interfaces;
+using BancoTalentos.Mvc.Extensions;
 
 namespace BancoTalentos.Mvc
 {
@@ -32,9 +33,10 @@ namespace BancoTalentos.Mvc
             services.AddDbContext<AplicacaoContexto>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IRepositoryProfissao, RepositoryProfissao>();
+            services.AddRepositories();
 
             services.AddControllersWithViews();
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

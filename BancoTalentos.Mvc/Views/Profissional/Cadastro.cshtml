@@ -1,24 +1,46 @@
-@model BancoTalentos.Modelos.Models.Profissional
+@model ProfissionalVM
 
 <h2>Cadastro Profissão</h2>
 
 <form class="form-horizontal" asp-action="Salvar" asp-controller="Profissional" method="POST">
 
-    <input type="hidden" class="form-control" asp-for="IdProfissional">
+    <input type="hidden" class="form-control" asp-for="ID">
     <div class="form-group">
         <label class="col-md-1 control-label" for="Name">Nome Completo</label>
         <div class="col-md-2">
         <input type="text" class="form-control" asp-for="NomeCompleto">
         </div>
     </div>
-    <div class="form-group">
+    <div>
         <label class="col-md-1 control-label" for="Name">Profissão</label>
         <div class="col-md-2">
             <select class="form-control" asp-for="IdProfissao" 
-                asp-items='@(new SelectList(@ViewBag.lstProfissaos, "IdProfissao", "Nome"))'>
+                asp-items='@(new SelectList(@ViewBag.Profissoes, "Id", "Nome"))'>
             </select>
         </div>
     </div>
+
+    <div class="form-group">
+        <label class="col-md-1 control-label" for="Email">Email</label>
+        <div class="col-md-2">
+        <input type="text" class="form-control" asp-for="Email">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-1 control-label" for="Telefone">Telefone</label>
+        <div class="col-md-2">
+        <input type="text" class="form-control" asp-for="Telefone">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-1 control-label" for="Telefone">Data Nascimento</label>
+        <div class="col-md-2">
+        <input type="date" class="form-control" asp-for="DataNascimento">
+        </div>
+    </div>
+
     <div class="form-group">
         <label class="col-md-1 control-label" for="Name">Ativo</label>
         <div class="col-md-2">

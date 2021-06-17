@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace BancoTalentos.Modelos.Interfaces
 {
-    public interface IRepositorioBase<TEntidade>
+    public interface IBaseRepository<TEntidade>
     
     {
         TEntidade ObterPorId(int id);

@@ -10,19 +10,28 @@ using BancoTalentos.Dados;
 using BancoTalentos.Modelos.Models;
 using BancoTalentos.Dados.Repositorios;
 using BancoTalentos.Modelos.Interfaces;
+using AutoMapper;
 
 namespace BancoTalentos.Mvc.Controllers
 {
     public class ProfissaoController : Controller
     {
-        private readonly IRepositoryProfissao _repositoryProfissao;
-        public ProfissaoController(IRepositoryProfissao repository)
+        private readonly IProfissaoRepository _repositoryProfissao;
+
+        private readonly IMapper _mapper;
+
+        public ProfissaoController(IProfissaoRepository repository, IMapper mapper)
         {
             _repositoryProfissao = repository;
+            _mapper = mapper;
         }
         public IActionResult Consulta(){
-            var profissoes = _repositoryProfissao.RetornaTodos();
+            List<Profissao> profissoesBD = _repositoryProfissao.RetornaTodos();
+            
+            List<ProfissaoVM> profissoes = _mapper.Map<List<ProfissaoVM>>(profissoesBD);
+            
             return View(profissoes);
+            
         }
 
         public IActionResult Cadastro(){
@@ -31,8 +40,11 @@ namespace BancoTalentos.Mvc.Controllers
         }
 
         [HttpPost]
-        public IActionResult Salvar(Profissao profissao)
+        public IActionResult Salvar(ProfissaoVM profissaoVM)
         {
+
+            Profissao profissao = _mapper.Map<Profissao>(profissaoVM);
+
             _repositoryProfissao.Salvar(profissao);
             return RedirectToAction("Consulta");
         }
@@ -42,7 +54,9 @@ namespace BancoTalentos.Mvc.Controllers
         {   
             Profissao profissao = _repositoryProfissao.ObterPorId(id);
 
-            return View("Cadastro", profissao);
+            ProfissaoVM profissaoVM = _mapper.Map<ProfissaoVM>(profissao);
+
+            return View("Cadastro", profissaoVM);
         }
 
         public IActionResult Deletar(int id)

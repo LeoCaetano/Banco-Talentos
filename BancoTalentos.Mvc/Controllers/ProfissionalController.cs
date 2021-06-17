@@ -10,33 +10,49 @@ using BancoTalentos.Dados;
 using BancoTalentos.Modelos.Models;
 using BancoTalentos.Dados.Repositorios;
 using BancoTalentos.Modelos.Interfaces;
+using AutoMapper;
+
 
 namespace BancoTalentos.Mvc.Controllers
 {
     public class ProfissionalController : Controller
     {
-        private readonly IRepositoryProfissional _repositoryProfissional;
-        private readonly IRepositoryProfissao _repositoryProfissao;
-        public ProfissionalController(IRepositoryProfissional repositoryProfissional, IRepositoryProfissao repositoryProfissao)
+        private readonly IProfissionalRepository _repositoryProfissional;
+        private readonly IProfissaoRepository _repositoryProfissao;
+        private readonly IMapper _mapper;
+
+        public ProfissionalController(IProfissionalRepository repositoryProfissional
+            , IProfissaoRepository repositoryProfissao
+            , IMapper mapper)
         {
             _repositoryProfissional = repositoryProfissional;
             _repositoryProfissao = repositoryProfissao;
+            _mapper = mapper;
         }
         public IActionResult Consulta(){
-            var profissoes = _repositoryProfissional.RetornaTodos();
-            return View(profissoes);
+            List<Profissional> profissionalBD = _repositoryProfissional.RetornaTodos();
+
+            List<ProfissionalVM> profissionais = _mapper.Map<List<ProfissionalVM>>(profissionalBD);
+
+            return View(profissionais);
         }
 
         public IActionResult Cadastro(){
-            ViewBag.profissoes = _repositoryProfissao.RetornaTodos();
 
+            List<Profissao> profissoesBD = _repositoryProfissao.RetornaTodos();
+            
+            List<ProfissaoVM> profissoes = _mapper.Map<List<ProfissaoVM>>(profissoesBD);
+            ViewBag.Profissoes = profissoes;
             return View();
         }
 
         [HttpPost]
-        public IActionResult Salvar(Profissional profissional)
+        public IActionResult Salvar(ProfissionalVM profissionalVM)
         {
+
+            Profissional profissional = _mapper.Map<Profissional>(profissionalVM);
             _repositoryProfissional.Salvar(profissional);
+
             return RedirectToAction("Consulta");
         }
 

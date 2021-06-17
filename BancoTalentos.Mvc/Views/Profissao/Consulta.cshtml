@@ -1,5 +1,5 @@
   
-@model IEnumerable<BancoTalentos.Modelos.Models.Profissao>
+@model IEnumerable<ProfissaoVM>
 
 <h2>Todas Profissões</h2>
 
@@ -25,10 +25,10 @@
                             <input type="checkbox" @(item.Ativo == true ? "checked" : "" ) disabled/>
                         </td>
                         <td>
-                            <a href="/Profissao/Editar/@item.IdProfissao" class="btn">Editar</a>
+                            <a href="/Profissao/Editar/@item.Id" class="btn">Editar</a>
                         </td>
                         <td>
-                            <a href="/Profissao/Deletar/@item.IdProfissao" class="btn">Deletar</a>
+                            <a href="/Profissao/Deletar/@item.Id" class="btn">Deletar</a>
                         </td>
                     </tr> 
                 }

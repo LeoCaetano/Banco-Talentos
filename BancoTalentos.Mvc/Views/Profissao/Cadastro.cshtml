@@ -1,10 +1,10 @@
-@model BancoTalentos.Modelos.Models.Profissao
+@model ProfissaoVM
 
 <h2>Cadastro Profissão</h2>
 
 <form class="form-horizontal" asp-action="Salvar" asp-controller="Profissao" method="POST">
 
-    <input type="hidden" class="form-control" asp-for="IdProfissao">
+    <input type="hidden" class="form-control" asp-for="Id">
     <div class="form-group">
         <label class="col-md-1 control-label" for="Name">Nome</label>
         <div class="col-md-2">

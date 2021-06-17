@@ -10,11 +10,11 @@ using System.Linq;
 
 namespace BancoTalentos.Dados.Repositorios
 {
-    public class RepositoryProfissao : IRepositoryProfissao
+    public class ProfissaoRepository : IProfissaoRepository
     {
         private readonly AplicacaoContexto _contexto;
 
-        public RepositoryProfissao(AplicacaoContexto contexto)
+        public ProfissaoRepository(AplicacaoContexto contexto)
         {
             _contexto = contexto;
         }
@@ -28,6 +28,8 @@ namespace BancoTalentos.Dados.Repositorios
             }else
                 _contexto.ProfissaoDbSet.Add(profissao);
             
+            _contexto.SaveChanges();
+
         }
 
         public Profissao ObterPorId(int id)

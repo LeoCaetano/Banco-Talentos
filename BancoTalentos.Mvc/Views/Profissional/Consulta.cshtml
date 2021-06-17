@@ -1,5 +1,5 @@
   
-@model IEnumerable<BancoTalentos.Modelos.Models.Profissional>
+@model IEnumerable<ProfissionalVM>
 
 <h2>Todos Profissionais</h2>
 
@@ -24,7 +24,7 @@
                             @item.NomeCompleto 
                         </td>
                         <td>
-                            @item.Profissao.Nome 
+                            @item.Profissao 
                         </td>
                         <td>
                             @item.Email 
