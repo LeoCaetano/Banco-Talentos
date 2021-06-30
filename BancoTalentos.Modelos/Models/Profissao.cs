@@ -7,13 +7,11 @@ namespace BancoTalentos.Modelos.Models
     public class Profissao
     {
         
-        [KeyAttribute]
+        [Key]
         public int IdProfissao { get; set; }
 
-        [Column("Nome")]
         public string Nome { get; set; }
 
-        [Column("Ativo")]
         public bool Ativo { get; set; }
     }
 }

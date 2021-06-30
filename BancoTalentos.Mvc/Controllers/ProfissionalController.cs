@@ -60,8 +60,14 @@ namespace BancoTalentos.Mvc.Controllers
          public IActionResult Editar(int id)
         {   
             Profissional profissional = _repositoryProfissional.ObterPorId(id);
+            ProfissionalVM profissionalVM = _mapper.Map<ProfissionalVM>(profissional);
 
-            return View("Cadastro", profissional);
+            List<Profissao> profissoesBD = _repositoryProfissao.RetornaTodos();
+
+            List<ProfissaoVM> profissoes = _mapper.Map<List<ProfissaoVM>>(profissoesBD);
+            ViewBag.Profissoes = profissoes;
+
+            return View("Cadastro", profissionalVM);
         }
 
         public IActionResult Inativar(int id)

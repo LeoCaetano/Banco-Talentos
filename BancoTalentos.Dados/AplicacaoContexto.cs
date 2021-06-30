@@ -10,6 +10,8 @@ namespace BancoTalentos.Dados
         public DbSet<Profissao> ProfissaoDbSet{ get; set; }
 
         public DbSet<Profissional> ProfissionalDbSet{ get; set; }
+
+        public DbSet<Empresa> EmpresaDbSet { get; set; }
         
     }
 }

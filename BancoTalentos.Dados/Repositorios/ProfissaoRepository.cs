@@ -46,7 +46,7 @@ namespace BancoTalentos.Dados.Repositorios
         {
             Profissao profissao = _contexto.ProfissaoDbSet.First(x => x.IdProfissao == id);
 
-            _contexto.Remove(profissao);
+            _contexto.ProfissaoDbSet.Remove(profissao);
 
             return _contexto.SaveChanges() > 0;
         }
